@@ -12,7 +12,7 @@
 	<artifactId>sicronizadorReceita</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>sicronizadorReceita</name>
-	<description> Course Spring Boot</description>
+	<description> Sicronizador Receita Federal</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
