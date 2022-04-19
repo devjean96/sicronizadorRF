@@ -44,5 +44,14 @@ Spring Batch (v2.6.6) \
 Maven
   
   
-           
+# Executando aplicação
+
+Inicialmente, realize o build do projeto, acessando o diretório do programa e executando o comando abaixo no terminal:
+```
+mvn install
+```
+Para iniciar o aplicativo, use o comando abaixo:
+```
+java -jar sicronizadorReceita-<version>.jar <filepath>.csv
+```
           
