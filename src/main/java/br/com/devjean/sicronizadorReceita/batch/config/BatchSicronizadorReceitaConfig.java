@@ -54,7 +54,6 @@ public class BatchSicronizadorReceitaConfig {
 	  return this.jobBuilderFactory
 	    .get("JobSicronizadorReceitaFederal")
 	    .start(step())
-	    .incrementer(new RunIdIncrementer())
 	    .build();
 	}
 	
@@ -67,6 +66,7 @@ public class BatchSicronizadorReceitaConfig {
     	       .retry(Exception.class).retryLimit(1)
     	       .skip(Exception.class).skipLimit(10)
     	       .writer(writer)
+    	       .allowStartIfComplete(true)
     		   .build();
     		  
 	}
