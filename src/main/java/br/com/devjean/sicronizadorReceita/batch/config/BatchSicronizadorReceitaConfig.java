@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.devjean.sicronizadorReceita.batch.job.step.processor.SicronizadorProcessor;
+import br.com.devjean.sicronizadorReceita.batch.job.step.processor.listener.SicronizadorProcessListener;
 import br.com.devjean.sicronizadorReceita.batch.job.step.reader.listener.SicronizadorReadListener;
 import br.com.devjean.sicronizadorReceita.model.Conta;
 import br.com.devjean.sicronizadorReceita.service.ReceitaService;
@@ -31,6 +32,9 @@ public class BatchSicronizadorReceitaConfig {
 	
 	@Autowired
 	private SicronizadorReadListener readListener;
+	
+	@Autowired
+	private SicronizadorProcessListener processListener;
 	
 	@Autowired
     @Qualifier(value = "fileItemReader")
@@ -59,7 +63,7 @@ public class BatchSicronizadorReceitaConfig {
       return stepBuilderFactory.get("StepSicronizador")
     		  .<Conta, Conta> chunk(1)
     	       .reader(reader).listener(readListener)
-    	       .processor(processor()).faultTolerant()
+    	       .processor(processor()).listener(processListener).faultTolerant()
     	       .retry(Exception.class).retryLimit(1)
     	       .skip(Exception.class).skipLimit(10)
     	       .writer(writer)
