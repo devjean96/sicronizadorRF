@@ -9,6 +9,7 @@ import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
 import br.com.devjean.sicronizadorReceita.batch.job.step.reader.mapper.ContaFieldSetMapper;
@@ -20,9 +21,9 @@ public class SicronizadorReader {
 	
 	@StepScope
 	@Bean("fileItemReader")
-	public FlatFileItemReader<Conta> fileItemReader(@Value("#{jobParameters['arquivo']}") Resource resource) {
+	public FlatFileItemReader<Conta> fileItemReader(@Value("#{jobParameters['arquivo']}") String resource) {
 	   return new FlatFileItemReaderBuilder<Conta>()
-	   .resource(resource)
+	   .resource(new FileSystemResource(resource))
 	   .encoding("ISO-8859-3")
 	   .name("CSV-Reader")
 	   .linesToSkip(1)
